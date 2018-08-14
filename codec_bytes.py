@@ -39,22 +39,34 @@ while True:
             print("Codificación Base16: ",s16)
     else:
         byt=input("Introduzca codificación: ")
+        #byt=byt.decode("UTF-8")#PASAR CODIFICACION EN BYTES A STRING
+        de64works=True;de32works=True;de16works=True
         try:
-            de=base64.b64decode(byt)
+            de64=base64.b64decode(byt)
         except:
-            try:
-                de=base64.b32decode(byt)
-            except:
-                try:
-                    de=base64.b16decode(byt)
-                except:
-                    print("ERROR: No se pudo llevar a cabo la decodificación con los datos introducidos")
-                    continue
-        print("OK")            
+            de64works=False
+        try:
+            de32=base64.b32decode(byt)
+        except:
+            de32works=False
+        try:
+            de16=base64.b16decode(byt)
+        except:
+            de16works=False
+            print("B64")
+        #except:
+            #print("ERROR: No se pudo llevar a cabo la decodificación con los datos introducidos")
+                #except:
+                    #print("ERROR: No se pudo llevar a cabo la decodificación con los datos introducidos")
+                    #continue
         if opc=="A":
-            print(de)
+            if de64works==True:
+                print("Decodificación Base64: ",de64)
+            if de32works==True:
+                print("Decodificación Base32: ",de32)
+            if de16works==True:
+                print("Decodificación Base16: ",de16)
         else:
-            #print(str(de))
             try:
                 bs=de.decode("UTF-8")
                 print(bs)
@@ -66,3 +78,4 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+
