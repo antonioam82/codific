@@ -12,8 +12,8 @@ def ns(op):
 
 while True:
     print("ESCOJA UNA OPCIÓN")
-    print("A)Codificar texto a bytes: ")
-    print("B)Decodificar bytes a texto: ")
+    print("A)Codificar texto a bytes")
+    print("B)Decodificar bytes a texto")
     op=AB(input("Introduzca aquí su opción: "))
 
     print("¿COMO DESEA VER LA CODIFICACIÓN?")
@@ -39,21 +39,27 @@ while True:
             print("Codificación Base16: ",s16)
     else:
         byt=input("Introduzca codificación: ")
+        byt=byt.encode("UTF-8")
         #byt=byt.decode("UTF-8")#PASAR CODIFICACION EN BYTES A STRING
         de64works=True;de32works=True;de16works=True
         try:
             de64=base64.b64decode(byt)
+            if opc=="B":
+                de64=de64.decode("UTF-8")
         except:
             de64works=False
         try:
             de32=base64.b32decode(byt)
+            if opc=="B":
+                de32=de32.decode("UTF-8")
         except:
             de32works=False
         try:
             de16=base64.b16decode(byt)
+            if opc=="B":
+                de16=de16.decode("UTF-8")
         except:
             de16works=False
-            print("B64")
         #except:
             #print("ERROR: No se pudo llevar a cabo la decodificación con los datos introducidos")
                 #except:
@@ -68,8 +74,17 @@ while True:
                 print("Decodificación Base16: ",de16)
         else:
             try:
-                bs=de.decode("UTF-8")
-                print(bs)
+                if de64works==True:
+                    
+                    print("Decodificación Base64: ",de64)
+                if de32works==True:
+                    
+                    print("Decodificación Base32: ",de32)
+                if de16works==True:
+                    
+                    print("Decodificación Base16: ",de16)
+                #bs=de.decode("UTF-8")
+                #print(bs)
             except:
                 print("No se pudo completar la operación")
             
@@ -77,5 +92,10 @@ while True:
     conti=ns(input("¿Desea continuar?: "))
     if conti=="n":
         break
-    subprocess.call(["cmd.exe","/C","cls"])
+    try:
+        subprocess.call(["cmd.exe","/C","cls"])
+    except:
+        continue
+
+
 
