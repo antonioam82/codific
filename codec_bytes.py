@@ -75,13 +75,10 @@ while True:
         else:
             try:
                 if de64works==True:
-                    
                     print("Decodificación Base64: ",de64)
                 if de32works==True:
-                    
                     print("Decodificación Base32: ",de32)
                 if de16works==True:
-                    
                     print("Decodificación Base16: ",de16)
                 #bs=de.decode("UTF-8")
                 #print(bs)
